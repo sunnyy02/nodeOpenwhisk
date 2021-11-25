@@ -1,0 +1,54 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: userservice
+
+# Remember to install project dependencies to register the provider plugin.
+# $ npm install
+provider:
+  name: openwhisk
+
+functions:
+  userList:
+    handler: src/handler/listHandler.user
+    events:
+      - http: GET user
+        resp: json
+  userCreate:
+    handler: src/handler/createHandler.user
+    annotations:
+      web-export: true
+    events:
+      - http: POST user
+  userUpdate:
+    handler: src/handler/updateHandler.user
+    events:
+      - http: PUT user
+  userDelete:
+    handler: src/handler/deleteHandler.user
+    events:
+      - http: DELETE user
+  userCreateAndList:
+    sequence: # Use sequences rather than handler to handle events. handler and sequence properties are mutually exclusive.
+      - userCreate
+      - userList
+    events:
+      - http: POST createList
+  slack:
+    handler: src/handler/slackHander.sendMessage
+    events:
+       - trigger: newUserTrigger
+# extend the framework using plugins listed here:
+# https://github.com/serverless/plugins
+plugins:
+  - serverless-openwhisk

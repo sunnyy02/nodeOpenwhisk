@@ -1,0 +1,16 @@
+{
+  "name": "nodewhiskservice",
+  "version": "1.0.0",
+  "description": "Sample OpenWhisk NodeJS serverless framework service.",
+  "main": "handler.js",
+  "keywords": [
+    "serverless",
+    "openwhisk"
+  ],
+  "devDependencies": {
+    "moment-timezone": "^0.5.11",
+    "serverless-openwhisk": ">=0.13.0",
+    "express": "^4.17.1",
+    "serverless-http": "^2.7.0"
+  }
+}
